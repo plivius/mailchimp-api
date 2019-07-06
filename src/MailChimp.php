@@ -14,6 +14,7 @@ class MailChimp
 {
     private $api_key;
     private $api_endpoint = 'https://<dc>.api.mailchimp.com/3.0';
+    private $user_agent = 'DrewM/MailChimp-API/3.0 (github.com/drewm/mailchimp-api)';
 
     const TIMEOUT = 10;
 
@@ -77,6 +78,13 @@ class MailChimp
         return $this->api_endpoint;
     }
 
+    /**
+     * @param $userAgent
+     */
+    public function setUserAgent($userAgent)
+    {
+        $this->user_agent = $userAgent;
+    }
 
     /**
      * Convert an email address into a 'subscriber hash' for identifying the subscriber in a method URL
@@ -234,7 +242,7 @@ class MailChimp
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $httpHeader);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'DrewM/MailChimp-API/3.0 (github.com/drewm/mailchimp-api)');
+        curl_setopt($ch, CURLOPT_USERAGENT, $this->user_agent);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_VERBOSE, true);
         curl_setopt($ch, CURLOPT_HEADER, true);
