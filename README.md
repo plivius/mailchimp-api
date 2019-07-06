@@ -211,6 +211,12 @@ If you suspect you're sending data in the wrong format, you can look at what was
 print_r($MailChimp->getLastRequest());
 ```
 
+When inspecting the api call log in your MailChimp account (/account/api/), you may find it convenient to differentiate calls based on "User Agent". You can alter the User Agent of your integration, e.g:
+
+```php
+$MailChimp->setUserAgent('MyIntegration.v1.0/DrewM/MailChimp-API');
+```
+
 If your server's CA root certificates are not up to date you may find that SSL verification fails and you don't get a response. The correction solution for this [is not to disable SSL verification](http://snippets.webaware.com.au/howto/stop-turning-off-curlopt_ssl_verifypeer-and-fix-your-php-config/). The solution is to update your certificates. If you can't do that, there's an option at the top of the class file. Please don't just switch it off without at least attempting to update your certs -- that's lazy and dangerous. You're not a lazy, dangerous developer are you?
 
 If you have **high-level implementation questions about your project** ("How do I add this to WordPress", "I've got a form that takes an email address...") please **take them to somewhere like StackOverflow**. If you think you've found a bug, or would like to discuss a change or improvement, feel free to raise an issue and we'll figure it out between us.
